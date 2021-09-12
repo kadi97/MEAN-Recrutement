@@ -1,0 +1,27 @@
+{
+  "name": "mean-recrutement",
+  "version": "1.0.0",
+  "description": "MEAN Recrutement pour mon memoire",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadi97/MEAN-Recrutement.git"
+  },
+  "keywords": [
+    "MEAN",
+    "Stack"
+  ],
+  "author": "Khady Diallo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadi97/MEAN-Recrutement/issues"
+  },
+  "homepage": "https://github.com/kadi97/MEAN-Recrutement#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
