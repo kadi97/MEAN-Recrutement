@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("./candidat-model");
+require("./recruteur-model");
 
 const dbName = "meanRecrutement";
 // const dbUrl = "mongodb://localhost:27017/"+dbName;
