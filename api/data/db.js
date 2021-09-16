@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 require("./candidat-model");
 require("./recruteur-model");
+require("./offre_emploi-model");
+require("./competence_candidat-model");
+require("./type_contrat-model");
+require("./entreprise-model");
 
 const dbName = "meanRecrutement";
 // const dbUrl = "mongodb://localhost:27017/"+dbName;
