@@ -64,6 +64,8 @@ module.exports.recruteurAddOne = function (req, res) {
     })
 }
 
+
+
 //ligne ajoutee (ici jusqua la fin)
 module.exports.recruteursGetOne = function (req, res) {
     const response = {
@@ -127,9 +129,9 @@ module.exports.recruteursFullUpdate = function (req, res) {
         if (recruteur) {
             recruteur.prenom = req.body.prenom;
             recruteur.nom = req.body.nom;
-            recruteur.telephone = req.body.telephone,
+            recruteur.telephone = req.body.telephone;
             recruteur.email = req.body.email;
-            recruteur.do = dob;
+            recruteur.dob = dob;
             recruteur.adresse = req.body.adresse;
 
             Recruteur.save(function (err, updatedrecruteur) {

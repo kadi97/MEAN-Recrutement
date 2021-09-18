@@ -9,9 +9,20 @@ const recuteurSchema = new mongoose.Schema({
         require: true
     },
     adresse: {
-        type: String
+        type: String,
+        require: true
     },
-    
+    telephone: {
+        type: String,
+        require: true
+    },
+    email: String,
+    dob: {
+        type: Date,
+        default: Date.now()
+    }
+
+
 });
 
 mongoose.model("Recruteur", recuteurSchema, "recruteur");

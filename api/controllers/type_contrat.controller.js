@@ -64,3 +64,180 @@ module.exports.type_contratAddOne = function (req, res) {
     })
 }
 
+
+//ligne ajoutee (ici jusqua la fin)
+module.exports.type_contratsGetOne = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const type_contratId = req.params.type_contratId;
+    const idLength = 24;
+    if (type_contratId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the type_contrat's ID should be " + idLength });
+        return;
+    }
+
+    Type_contrat.findById(type_contratId).exec(function (err, doc) {
+        if (err) {
+            console.log("Found type_contrat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!doc) {
+            console.log("type_contrat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = userError;
+            response.message = { "message": "type_contrat ID not found" };
+        } else {
+            console.log("type_contrat found ", doc);
+            // res.status(successError).json(doc);
+            response.status = successError;
+            response.message = doc;
+        }
+        res.status(response.status).json(response.message);
+    });
+}
+
+module.exports.type_contratsFullUpdate = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const type_contratId = req.params.type_contratId;
+    const idLength = 24;
+    if (type_contratId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the type_contrat's ID should be " + idLength });
+        return;
+    }
+
+    Type_contrat.findById(type_contratId).exec(function (err, type_contrat) {
+        if (err) {
+            console.log("Found type_contrat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!type_contrat) {
+            console.log("type_contrat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = userError;
+            response.message = { "message": "type_contrat ID not found" };
+        }
+        if (type_contrat) {
+            type_contrat.nature = req.body.nature;
+            type_contrat.dure = req.body.dure;
+            // type_contrat.telephone = req.body.telephone;
+            // type_contrat.email = req.body.email;
+            // type_contrat.dob = dob;
+            // type_contrat.adresse = req.body.adresse;
+
+            Type_contrat.save(function (err, updatedtype_contrat) {
+                if (err) {
+                    console.log("type_contrat not updated");
+                    response.status = notFoundError;
+                    response.message = { "message": "type_contrat not updated" }
+                } else {
+                    // response.status = notFoundError;
+                    response.message = updatedtype_contrat
+                }
+                res.status(response.status).json(response.message);
+            })
+        }
+    });
+
+}
+
+module.exports.type_contratsPartialUpdate = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const type_contratId = req.params.type_contratId;
+    const idLength = 24;
+    if (type_contratId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the type_contrat's ID should be " + idLength });
+        return;
+    }
+
+    Type_contrat.findById(type_contratId).exec(function (err, type_contrat) {
+        if (err) {
+            console.log("Found type_contrat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!type_contrat) {
+            console.log("type_contrat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = userError;
+            response.message = { "message": "type_contrat ID not found" };
+        } if (type_contrat) {
+            
+            if (req.body.nature) {
+                type_contrat.nature = req.body.nature;
+            }
+            if (req.body.dure) {
+                type_contrat.dure = req.body.dure;
+            }
+           
+            // if (req.body.email) {
+            //     type_contrat.email = req.body.email;
+            // }
+            // if (req.body.telephone) {
+            //     type_contrat.telephone = req.body.telephone;
+            // }
+            // if (req.body.dob) {
+            //     type_contrat.dob = req.body.dob;
+            // }
+
+            Type_contrat.save(function (err, updatedtype_contrat) {
+                if (err) {
+                    console.log("type_contrat not updated");
+                    response.status = notFoundError;
+                    response.message = { "message": "type_contrat not updated" }
+                } else {
+                    // response.status = notFoundError;
+                    response.message = updatedtype_contrat
+                }
+                res.status(response.status).json(response.message);
+            })
+        }
+        // res.status(response.status).json(response.message);
+    });
+}
+
+module.exports.type_contratsDeleteOne = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const type_contratId = req.params.type_contratId;
+    const idLength = 24;
+    if (type_contratId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the type_contrat's ID should be " + idLength });
+        return;
+    }
+
+    Type_contrat.findByIdAndRemove(type_contratId).exec(function (err, deletedtype_contrat) {
+        if (err) {
+            console.log("Found type_contrat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!deletedtype_contrat) {
+            console.log("type_contrat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = notFoundError;
+            response.message = { "message": "type_contrat ID not found" };
+        } else {
+            console.log("type_contrat deleted ", deletedtype_contrat);
+            // res.status(successError).json(doc);
+            response.status = successError;
+            response.message = deletedtype_contrat;
+        }
+        res.status(response.status).json(response.message);
+    });
+}

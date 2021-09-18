@@ -64,3 +64,180 @@ module.exports.candidatAddOne = function (req, res) {
     })
 }
 
+
+//ligne ajoutee (ici jusqua la fin)
+module.exports.candidatsGetOne = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const candidatId = req.params.candidatId;
+    const idLength = 24;
+    if (candidatId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the candidat's ID should be " + idLength });
+        return;
+    }
+
+    Candidat.findById(candidatId).exec(function (err, doc) {
+        if (err) {
+            console.log("Found candidat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!doc) {
+            console.log("candidat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = userError;
+            response.message = { "message": "candidat ID not found" };
+        } else {
+            console.log("candidat found ", doc);
+            // res.status(successError).json(doc);
+            response.status = successError;
+            response.message = doc;
+        }
+        res.status(response.status).json(response.message);
+    });
+}
+
+module.exports.candidatsFullUpdate = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const candidatId = req.params.candidatId;
+    const idLength = 24;
+    if (candidatId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the candidat's ID should be " + idLength });
+        return;
+    }
+
+    Candidat.findById(candidatId).exec(function (err, candidat) {
+        if (err) {
+            console.log("Found candidat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!candidat) {
+            console.log("candidat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = userError;
+            response.message = { "message": "candidat ID not found" };
+        }
+        if (candidat) {
+            candidat.prenom = req.body.prenom;
+            candidat.nom = req.body.nom;
+            candidat.telephone = req.body.telephone;
+            candidat.email = req.body.email;
+            candidat.dob = dob;
+            candidat.adresse = req.body.adresse;
+
+            Candidat.save(function (err, updatedcandidat) {
+                if (err) {
+                    console.log("candidat not updated");
+                    response.status = notFoundError;
+                    response.message = { "message": "candidat not updated" }
+                } else {
+                    // response.status = notFoundError;
+                    response.message = updatedcandidat
+                }
+                res.status(response.status).json(response.message);
+            })
+        }
+    });
+
+}
+
+module.exports.candidatsPartialUpdate = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const candidatId = req.params.candidatId;
+    const idLength = 24;
+    if (candidatId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the candidat's ID should be " + idLength });
+        return;
+    }
+
+    Candidat.findById(candidatId).exec(function (err, candidat) {
+        if (err) {
+            console.log("Found candidat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!candidat) {
+            console.log("candidat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = userError;
+            response.message = { "message": "candidat ID not found" };
+        } if (candidat) {
+            if (req.body.nom) {
+                candidat.nom = req.body.nom;
+            }
+            if (req.body.prenom) {
+                candidat.prenom = req.body.prenom;
+            }
+            if (req.body.email) {
+                candidat.email = req.body.email;
+            }
+            if (req.body.telephone) {
+                candidat.telephone = req.body.telephone;
+            }
+            if (req.body.dob) {
+                candidat.dob = req.body.dob;
+            }
+
+            Candidat.save(function (err, updatedcandidat) {
+                if (err) {
+                    console.log("candidat not updated");
+                    response.status = notFoundError;
+                    response.message = { "message": "candidat not updated" }
+                } else {
+                    // response.status = notFoundError;
+                    response.message = updatedcandidat
+                }
+                res.status(response.status).json(response.message);
+            })
+        }
+        // res.status(response.status).json(response.message);
+    });
+}
+
+module.exports.candidatsDeleteOne = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+    const candidatId = req.params.candidatId;
+    const idLength = 24;
+    if (candidatId.length != idLength) {
+        res.status(userError).json({ "message": "The length of the candidat's ID should be " + idLength });
+        return;
+    }
+
+    Candidat.findByIdAndRemove(candidatId).exec(function (err, deletedcandidat) {
+        if (err) {
+            console.log("Found candidat error", err);
+            //res.status(200).json(err);
+            response.status = userError;
+            response.message = err;
+        } else if (!deletedcandidat) {
+            console.log("candidat ID not found ");
+            // res.status(userError).json(doc);
+            response.status = notFoundError;
+            response.message = { "message": "candidat ID not found" };
+        } else {
+            console.log("candidat deleted ", deletedcandidat);
+            // res.status(successError).json(doc);
+            response.status = successError;
+            response.message = deletedcandidat;
+        }
+        res.status(response.status).json(response.message);
+    });
+}
+
+
