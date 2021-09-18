@@ -19,8 +19,9 @@ router.route("/candidat")
 
 router.route("/recruteur")
     .get(controllerRecruteur.recruteurGetAll)
-    .post(controllerRecruteur.recruteurAddOne)
+    .post(controllerRecruteur.recruteurAddOne);
     //lignes ajoutees
+router.route("/recruteur/:recruteurId")
     .get(controllerRecruteur.recruteursGetOne)
     .put(controllerRecruteur.recruteursFullUpdate)
     .patch(controllerRecruteur.recruteursPartialUpdate)

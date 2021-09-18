@@ -24,6 +24,7 @@
   "homepage": "https://github.com/kadi97/MEAN-Recrutement#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.5"
+    "mongoose": "^6.0.5",
+    "nodemon": "^2.0.12"
   }
 }

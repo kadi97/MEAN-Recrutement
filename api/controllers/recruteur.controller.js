@@ -131,10 +131,10 @@ module.exports.recruteursFullUpdate = function (req, res) {
             recruteur.nom = req.body.nom;
             recruteur.telephone = req.body.telephone;
             recruteur.email = req.body.email;
-            recruteur.dob = dob;
+            recruteur.dob = req.body.dob;
             recruteur.adresse = req.body.adresse;
 
-            Recruteur.save(function (err, updatedrecruteur) {
+            recruteur.save(function (err, updatedrecruteur) {
                 if (err) {
                     console.log("recruteur not updated");
                     response.status = notFoundError;
@@ -191,7 +191,7 @@ module.exports.recruteursPartialUpdate = function (req, res) {
                 recruteur.dob = req.body.dob;
             }
 
-            Recruteur.save(function (err, updatedrecruteur) {
+            recruteur.save(function (err, updatedrecruteur) {
                 if (err) {
                     console.log("recruteur not updated");
                     response.status = notFoundError;
