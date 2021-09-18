@@ -16,7 +16,14 @@ router.route("/candidat")
 router.route("/recruteur")
     .get(controllerRecruteur.recruteurGetAll)
     .post(controllerRecruteur.recruteurAddOne)
+    //lignes ajoutees
+    .put(controllerRecruteur.recruteursFullUpdate)
+    .patch(controllerRecruteur.recruteursPartialUpdate)
+    .delete(controllerRecruteur.recruteursDeleteOne)
+    //fin ligne ajoutee
     ;
+
+
 
 router.route("/offre_emploi")
     .get(controllerOffre_emploi.offre_emploiGetAll)
