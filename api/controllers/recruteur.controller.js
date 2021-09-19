@@ -43,7 +43,8 @@ module.exports.recruteurAddOne = function (req, res) {
         telephone: req.body.telephone,
         email: req.body.email,
         dob: dob,
-        adresse: req.body.adresse
+        adresse: req.body.adresse,
+        entreprise: {}
     };
 
     Recruteur.create(newRecruteur, function (err, recruteur) {

@@ -5,6 +5,7 @@ require("./offre_emploi-model");
 require("./competence_candidat-model");
 require("./type_contrat-model");
 require("./entreprise-model");
+require("./candidature-model");
 
 const dbName = "meanRecrutement";
 // const dbUrl = "mongodb://localhost:27017/"+dbName;
