@@ -133,7 +133,7 @@ module.exports.type_contratsFullUpdate = function (req, res) {
             // type_contrat.dob = dob;
             // type_contrat.adresse = req.body.adresse;
 
-            Type_contrat.save(function (err, updatedtype_contrat) {
+            type_contrat.save(function (err, updatedtype_contrat) {
                 if (err) {
                     console.log("type_contrat not updated");
                     response.status = notFoundError;
@@ -192,7 +192,7 @@ module.exports.type_contratsPartialUpdate = function (req, res) {
             //     type_contrat.dob = req.body.dob;
             // }
 
-            Type_contrat.save(function (err, updatedtype_contrat) {
+            type_contrat.save(function (err, updatedtype_contrat) {
                 if (err) {
                     console.log("type_contrat not updated");
                     response.status = notFoundError;

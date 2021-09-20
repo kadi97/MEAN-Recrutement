@@ -130,10 +130,10 @@ module.exports.candidatsFullUpdate = function (req, res) {
             candidat.nom = req.body.nom;
             candidat.telephone = req.body.telephone;
             candidat.email = req.body.email;
-            candidat.dob = dob;
+            candidat.dob = req.body.dob;
             candidat.adresse = req.body.adresse;
 
-            Candidat.save(function (err, updatedcandidat) {
+            candidat.save(function (err, updatedcandidat) {
                 if (err) {
                     console.log("candidat not updated");
                     response.status = notFoundError;
@@ -190,7 +190,7 @@ module.exports.candidatsPartialUpdate = function (req, res) {
                 candidat.dob = req.body.dob;
             }
 
-            Candidat.save(function (err, updatedcandidat) {
+            candidat.save(function (err, updatedcandidat) {
                 if (err) {
                     console.log("candidat not updated");
                     response.status = notFoundError;

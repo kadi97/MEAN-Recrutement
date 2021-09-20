@@ -133,10 +133,10 @@ module.exports.offre_emploisFullUpdate = function (req, res) {
             offre_emploi.intitule = req.body.intitule;
             offre_emploi.statut = req.body.statut;
             offre_emploi.description = req.body.description;
-            offre_emploi.date_publication = date_publication;
-            offre_emploi.date_fin_publication = date_fin_publication;
+            offre_emploi.date_publication = req.body.date_publication;
+            offre_emploi.date_fin_publication = req.body.date_fin_publication;
 
-            Offre_emploi.save(function (err, updatedoffre_emploi) {
+            offre_emploi.save(function (err, updatedoffre_emploi) {
                 if (err) {
                     console.log("offre_emploi not updated");
                     response.status = notFoundError;
@@ -193,7 +193,7 @@ module.exports.offre_emploisPartialUpdate = function (req, res) {
                 offre_emploi.date_fin_publication = req.body.date_fin_publication;
             }
 
-            Offre_emploi.save(function (err, updatedoffre_emploi) {
+            offre_emploi.save(function (err, updatedoffre_emploi) {
                 if (err) {
                     console.log("offre_emploi not updated");
                     response.status = notFoundError;

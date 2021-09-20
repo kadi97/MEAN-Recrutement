@@ -130,7 +130,7 @@ module.exports.competence_candidatsFullUpdate = function (req, res) {
             competence_candidat.type = req.body.type;
             competence_candidat.niveau = req.body.niveau;
 
-            Competence_candidat.save(function (err, updatedcompetence_candidat) {
+            competence_candidat.save(function (err, updatedcompetence_candidat) {
                 if (err) {
                     console.log("competence_candidat not updated");
                     response.status = notFoundError;
@@ -187,7 +187,7 @@ module.exports.competence_candidatsPartialUpdate = function (req, res) {
             //     competence_candidat.dob = req.body.dob;
             // }
 
-            Competence_candidat.save(function (err, updatedcompetence_candidat) {
+            competence_candidat.save(function (err, updatedcompetence_candidat) {
                 if (err) {
                     console.log("competence_candidat not updated");
                     response.status = notFoundError;

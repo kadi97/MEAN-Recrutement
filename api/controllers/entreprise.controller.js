@@ -130,7 +130,7 @@ module.exports.entreprisesFullUpdate = function (req, res) {
             entreprise.logo = req.body.logo;
            
             
-            Entreprise.save(function (err, updatedentreprise) {
+            entreprise.save(function (err, updatedentreprise) {
                 if (err) {
                     console.log("entreprise not updated");
                     response.status = notFoundError;
@@ -181,7 +181,7 @@ module.exports.entreprisesPartialUpdate = function (req, res) {
                 entreprise.logo = req.body.logo;
             }
             
-            Entreprise.save(function (err, updatedentreprise) {
+            entreprise.save(function (err, updatedentreprise) {
                 if (err) {
                     console.log("entreprise not updated");
                     response.status = notFoundError;
