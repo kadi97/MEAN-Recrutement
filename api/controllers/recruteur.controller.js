@@ -47,6 +47,13 @@ module.exports.recruteurAddOne = function (req, res) {
         entreprise: {}
     };
 
+    // const newEntreprise = {
+    //     nom: req.body.entreprise.nom,
+    //     adresse: req.body.entreprise.adresse,
+    //     logo: req.body.entreprise.logo
+    // };
+    // newRecruteur.entreprise = newEntreprise;
+
     Recruteur.create(newRecruteur, function (err, recruteur) {
         const response = {
             status: successError,

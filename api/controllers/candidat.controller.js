@@ -37,14 +37,24 @@ module.exports.candidatAddOne = function (req, res) {
     if (!dob){
         dob = Date.now();
     }
+    const candidature = {
+        type_entretien: req.body.candidature[0].type_entretien,
+        status: req.body.candidature[0].status,
+        decision:req.body.candidature[0].decision
+    }
     let newCandidat = {
         prenom: req.body.prenom,
         nom: req.body.nom,
         telephone: req.body.telephone,
         email: req.body.email,
         dob: dob,
-        adresse: req.body.adresse
+        adresse: req.body.adresse,
+        candidature: []
     };
+    //ajouter une candidature dans la liste
+    newCandidat.candidature.push(candidature);
+    //pour suprimer lelelment en haut je fais
+    //newCandidat.canadidature.pop()
 
     Candidat.create(newCandidat, function (err, candidat) {
         const response = {
