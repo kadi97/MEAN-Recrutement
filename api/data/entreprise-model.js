@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const recruteurSchema  = require("./recruteur-model");
 const entrepriseSchema = new mongoose.Schema({
     nom: {
         type:String,
@@ -11,7 +12,9 @@ const entrepriseSchema = new mongoose.Schema({
     },
     logo: {
         type: String
-    }
+    },
+    recruteur: [recruteurSchema]
+
 });
 
 mongoose.model("Entreprise", entrepriseSchema, "entreprise");
