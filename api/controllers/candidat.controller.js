@@ -42,6 +42,18 @@ module.exports.candidatAddOne = function (req, res) {
         status: req.body.candidature[0].status,
         decision:req.body.candidature[0].decision
     }
+    const competence_candidat = {
+        nom_competence: req.body.competence_candidat[1].nom_competence,
+        type: req.body.competence_candidat[1].type,
+        niveau: req.body.competence_candidat[1].type
+    }
+    const offre_emploi = {
+        intitule: req.body.offre_emploi[2].intitule,
+        statut: req.body.offre_emploi[2].statut,
+        description: req.body.offre_emploi[2].description,
+        date_publication: req.body.offre_emploi[2].date_publication,
+        date_fin_publication: req.body.offre_emploi[2].date_fin_publication
+    }
     let newCandidat = {
         prenom: req.body.prenom,
         nom: req.body.nom,
@@ -49,10 +61,14 @@ module.exports.candidatAddOne = function (req, res) {
         email: req.body.email,
         dob: dob,
         adresse: req.body.adresse,
-        candidature: []
+        candidature: [],
+        competence_candidat: [],
+        offre_emploi: []
     };
     //ajouter une candidature dans la liste
     newCandidat.candidature.push(candidature);
+    newCandidat.competence_candidat.push(competence_candidat);
+    newCandidat.offre_emploi.push(offre_emploi);
     //pour suprimer lelelment en haut je fais
     //newCandidat.canadidature.pop()
 

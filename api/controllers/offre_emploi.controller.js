@@ -41,14 +41,30 @@ module.exports.offre_emploiAddOne = function (req, res) {
     if (!date_fin_publication){
         date_fin_publication = Date.now();
     }
+    const candidat = {
+        
+        nom: req.body.candidat[0].nom,
+        prenom: req.body.candidat[0].prenom,
+        adresse: req.body.candidat[0].adresse,
+        telephone: req.body.candidat[0].telephone
+    }
+
     let newOffre_emploi = {
         intitule: req.body.intitule,
         statut: req.body.statut,
         description: req.body.description,
         date_publication: date_publication,
-        date_fin_publication: date_fin_publication
-        
+        date_fin_publication: date_fin_publication,
+
+       candidat: [],
+       entreprise: {},
+       type_contrat: {}
+
     };
+        
+    
+
+    newOffre_emploi.candidat.push(candidat);
 
     Offre_emploi.create(newOffre_emploi, function (err, offre_emploi) {
         const response = {

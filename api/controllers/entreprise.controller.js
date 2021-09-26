@@ -37,11 +37,32 @@ module.exports.entrepriseAddOne = function (req, res) {
     // if (!dob){
     //     dob = Date.now();
     // }
+    const offre_emploi = {
+        intitule: req.body.offre_emploi[0].intitule,
+        statut: req.body.offre_emploi[0].statut,
+        description: req.body.offre_emploi[0].description,
+        date_publication: req.body.offre_emploi[0].date_publication,
+        date_fin_publication: req.body.offre_emploi[0].date_fin_publication
+    }
+
+    const recruteur = {
+        nom: req.body.recruteur[1].nom,
+        prenom: req.body.recruteur[1].prenom,
+        adresse: req.body.recruteur[1].adresse,
+        telephone: req.body.recruteur[1].telephone
+    }
+
     let newEntreprise = {
         nom: req.body.nom,
         adresse: req.body.adresse,
-        logo: req.body.logo
+        logo: req.body.logo,
+        offre_emploi: [],
+        recruteur: []
     };
+
+    newEntreprise.offre_emploi.push(offre_emploi);
+    newEntreprise.recruteur.push(recruteur);
+
 
     Entreprise.create(newEntreprise, function (err, entreprise) {
         const response = {

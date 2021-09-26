@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const entrepriseSchema = require("./entreprise-model");
+const candidatureSchema = require("./candidature-model");
+
 const recuteurSchema = new mongoose.Schema({
     nom: {
         type:String,
@@ -23,7 +25,8 @@ const recuteurSchema = new mongoose.Schema({
         default: Date.now()
     },
     //L'entreprise du recruter sous un objet
-    entreprise: {entrepriseSchema}
+    entreprise: {entrepriseSchema},
+    candidature:[candidatureSchema]
 
 
 });

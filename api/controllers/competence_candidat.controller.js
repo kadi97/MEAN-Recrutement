@@ -41,9 +41,10 @@ module.exports.competence_candidatAddOne = function (req, res) {
         
         nom_competence: req.body.nom_competence,
         type: req.body.type,
-        niveau: req.body.niveau
+        niveau: req.body.niveau,
         // dob: dob,
         // adresse: req.body.adresse
+        candidat: {}
     };
 
     Competence_candidat.create(newCompetence_candidat, function (err, competence_candidat) {

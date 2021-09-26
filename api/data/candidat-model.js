@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const candidatureSchema = require("./candidature-model");
+const offre_emploiSchema = require('./offre_emploi-model');
+const competence_candidatSchema = require("./competence_candidat-model")
 
 const candidatSchema = new mongoose.Schema({
     nom: {
@@ -11,10 +13,12 @@ const candidatSchema = new mongoose.Schema({
         require: true
     },
     adresse: {
-        type: String
+        type: String,
+        require: true
     },
     telephone: {
-        type: String
+        type: String,
+        require: true
     },
     cv: String,
     email: String,
@@ -23,7 +27,10 @@ const candidatSchema = new mongoose.Schema({
         default: Date.now()
     },
     //Liste de candidature
-    candidature: [candidatureSchema]
+
+    candidature: [candidatureSchema],
+    offre_emploi: [offre_emploiSchema],
+    competence_candidat: [competence_candidatSchema]
 });
 
 mongoose.model("Candidat", candidatSchema, "candidat");

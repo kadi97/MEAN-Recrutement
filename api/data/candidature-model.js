@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const recruteurSchema = require ("./recruteur-model");
+const candidatSchema = require("./candidat-model");
+
 const candidatureSchema = new mongoose.Schema({
     type_entretien: {
         type:String,
@@ -16,6 +19,10 @@ const candidatureSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+
+    recruteur: [recruteurSchema],
+    candidat: {candidatSchema}
+
 });
 
 mongoose.model("Candidature", candidatureSchema, "candidature");

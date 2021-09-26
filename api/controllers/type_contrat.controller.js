@@ -41,10 +41,21 @@ module.exports.type_contratAddOne = function (req, res) {
     // if (!date_fin_publication){
     //     date_fin_publication = Date.now();
     // }
+    const offre_emploi = {
+        intitule: req.body.offre_emploi[0].intitule,
+        statut: req.body.offre_emploi[0].statut,
+        description: req.body.offre_emploi[0].description,
+        date_publication: req.body.offre_emploi[0].date_publication,
+        date_fin_publication: req.body.offre_emploi[0].date_fin_publication
+    }
+
     let newType_contrat = {
         nature: req.body.nature,
-        dure: req.body.dure
+        dure: req.body.dure, 
+        offre_emploi: []
     };
+
+    newType_contrat.offre_emploi.push(offre_emploi);
 
     Type_contrat.create(newType_contrat, function (err, type_contrat) {
         const response = {
