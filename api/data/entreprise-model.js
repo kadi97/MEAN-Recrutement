@@ -16,7 +16,7 @@ const entrepriseSchema = new mongoose.Schema({
         type: String
     },
     recruteur: [recruteurSchema],
-    offre_emploi = [offre_emploiSchema]
+    offre_emploi: [offre_emploiSchema]
 
 });
 

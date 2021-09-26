@@ -33,23 +33,24 @@ module.exports.entrepriseGetAll = function(req, res) {
 
 module.exports.entrepriseAddOne = function (req, res) {
     console.log("Add one entreprise");
-    // let dob = req.body.dob;
-    // if (!dob){
-    //     dob = Date.now();
-    // }
-    const offre_emploi = {
-        intitule: req.body.offre_emploi[0].intitule,
-        statut: req.body.offre_emploi[0].statut,
-        description: req.body.offre_emploi[0].description,
-        date_publication: req.body.offre_emploi[0].date_publication,
-        date_fin_publication: req.body.offre_emploi[0].date_fin_publication
+    const offre_emploi = {};
+    if (req.body.offre_emploi){
+        offre_emploi = {
+            intitule: req.body.offre_emploi[0].intitule,
+            statut: req.body.offre_emploi[0].statut,
+            description: req.body.offre_emploi[0].description,
+            date_publication: req.body.offre_emploi[0].date_publication,
+            date_fin_publication: req.body.offre_emploi[0].date_fin_publication
+        }
     }
-
-    const recruteur = {
-        nom: req.body.recruteur[1].nom,
-        prenom: req.body.recruteur[1].prenom,
-        adresse: req.body.recruteur[1].adresse,
-        telephone: req.body.recruteur[1].telephone
+    const recruteur = {};
+    if (req.body.recruteur){
+        recruteur = {
+            nom: req.body.recruteur[1].nom,
+            prenom: req.body.recruteur[1].prenom,
+            adresse: req.body.recruteur[1].adresse,
+            telephone: req.body.recruteur[1].telephone
+        }
     }
 
     let newEntreprise = {

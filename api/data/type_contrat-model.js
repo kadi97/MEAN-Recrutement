@@ -11,7 +11,7 @@ const type_contratSchema = new mongoose.Schema({
         require: true
     },
 
-    offre_emploi = [offre_emploiSchema]
+    offre_emploi: [offre_emploiSchema]
 });
 
 mongoose.model("Type_contrat", type_contratSchema, "type_contrat");

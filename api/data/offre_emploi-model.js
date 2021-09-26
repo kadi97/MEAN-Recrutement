@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const type_contratSchema = require("./type_contrat-model");
 const candidatSchema = require("./candidat-model");
-const entreprise = require("./entreprise-model");
+const entrepriseSchema = require("./entreprise-model");
 
 const offre_emploiSchema = new mongoose.Schema({
     intitule: {
@@ -23,9 +23,9 @@ const offre_emploiSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    candidat = [candidatSchema],
-    type_contrat = {type_contratSchema},
-    entreprise = {entrepriseSchema}
+    candidat: [candidatSchema],
+    type_contrat: {type_contratSchema},
+    entreprise: {entrepriseSchema}
     
 });
 
