@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecruteurService } from './service/recruteur.service';
+import { Recruteur } from './component/recruteur/recruteur.component';
 
 @Component({
   selector: 'app-root',
@@ -21,14 +22,4 @@ export class AppComponent implements OnInit{
     this.recruteurService.getRecruteurs()
       .then(foundRecruteurs => this.recruteursList = foundRecruteurs);
   }
-}
-
-
-export class Recruteur{
-  _id!:string;
-  nom!:string;
-  prenom!:string;
-  adresse!:string;
-  telephone!:string;
-  dob!:Date;
 }

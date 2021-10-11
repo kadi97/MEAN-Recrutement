@@ -207,6 +207,9 @@ module.exports.recruteursPartialUpdate = function (req, res) {
             if (req.body.dob) {
                 recruteur.dob = req.body.dob;
             }
+            if (req.body.adresse) {
+                recruteur.adresse = req.body.adresse;
+            }
 
             recruteur.save(function (err, updatedrecruteur) {
                 if (err) {

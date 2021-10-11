@@ -7,7 +7,7 @@ import { RecruteurService } from 'src/app/service/recruteur.service';
   styleUrls: ['./recruteur.component.css']
 })
 export class RecruteurComponent implements OnInit {
-  title = 'Partie recrutement';
+  title = 'module de recrutement';
   recruteursList!: Recruteur[];
   constructor(private recruteurService:RecruteurService){}
 
@@ -30,4 +30,5 @@ export class Recruteur{
   adresse!:string;
   telephone!:string;
   dob!:Date;
+  email!:string;
 }

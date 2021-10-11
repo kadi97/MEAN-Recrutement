@@ -2,8 +2,9 @@ const express = require("express");
 require("./api/data/db");
 const app = express();
 const route = require("./api/routes/route");
+const port = 3000;
 
-app.listen(3000);
+app.listen(port);
 console.log("server started");
 //autoriser le body pour les requetes de type POST
 app.use(express.urlencoded({extended: false}));

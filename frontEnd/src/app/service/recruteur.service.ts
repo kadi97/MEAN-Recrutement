@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Recruteur } from '../app.component';
+import { Recruteur } from '../component/recruteur/recruteur.component';
 
 @Injectable({
   providedIn: 'root'

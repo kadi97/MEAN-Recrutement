@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecruteurComponent } from './recruteur.component';
+import { RecruteurService } from '../../service/recruteur.service';
 
 describe('RecruteurComponent', () => {
   let component: RecruteurComponent;
@@ -8,7 +9,12 @@ describe('RecruteurComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecruteurComponent ]
+      declarations: [ RecruteurComponent ],
+      providers:[
+        {
+          provide: RecruteurService, useValue: jasmine.createSpyObj('RecruteurService', ['getRecruteurs'])
+        }
+      ]
     })
     .compileComponents();
   });

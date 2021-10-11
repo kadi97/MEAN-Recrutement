@@ -7,12 +7,14 @@ import { RecruteurComponent } from './component/recruteur/recruteur.component';
 import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RecruteurService } from './service/recruteur.service';
+import { CandidatComponent } from './component/candidat/candidat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecruteurComponent,
-    NavigationComponent
+    NavigationComponent,
+    CandidatComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -24,10 +26,15 @@ import { RecruteurService } from './service/recruteur.service';
         path: "recruteur", component: RecruteurComponent
       },
       {
+        //modifier de telle sorte que cela
+        path: "candidat", component: RecruteurComponent
+      },
+      {
         path:"nav", component:NavigationComponent
       }
     ])
   ],
+  //exports: [RouterModule],
   providers: [RecruteurService],
   bootstrap: [AppComponent]
 })
