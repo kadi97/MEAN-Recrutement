@@ -2,6 +2,7 @@ ng serve: demarrer le serveur angular (Front end)
 ng g service nom_servce: generer un service 
 ng g component nom_component: geenrer un component
 ng g pipe nom_pipe: generer un pipe
+npm i installer les packages manquant
 //BackEnd
 nodemon: demarrerle serveur BackEnd sans pouvoir le redemarrer a chaque modification
 npm start: demarrer le serveur mais il va falloir redemarrer le serveur apres chaque modification
@@ -16,3 +17,8 @@ Creer une page pour lister les candidats
 1- Creer un component nommé: candidat
 2- Creer un service nommé: candidat puis creer dedans la methode getAllCandidats()
 3- Utiliser la page recruteur pour aficher la liste des candidats dans l'URL: http:localhost:4200/candidat
+
+//dossier a modifier
+component(sof le spec)
+Service(sof le spec)
+app.module.ts

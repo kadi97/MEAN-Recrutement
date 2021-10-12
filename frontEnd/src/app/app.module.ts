@@ -27,7 +27,7 @@ import { CandidatComponent } from './component/candidat/candidat.component';
       },
       {
         //modifier de telle sorte que cela
-        path: "candidat", component: RecruteurComponent
+        path: "candidat", component: CandidatComponent
       },
       {
         path:"nav", component:NavigationComponent

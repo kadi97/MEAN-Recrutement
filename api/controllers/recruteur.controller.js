@@ -38,11 +38,11 @@ module.exports.recruteurAddOne = function (req, res) {
         dob = Date.now();
     }
 
-    const candidature = {
-        type_entretien: req.body.candidature[0].type_entretien,
-        status: req.body.candidature[0].status,
-        decision:req.body.candidature[0].decision
-    }
+    // const candidature = {
+    //     type_entretien: req.body.candidature[0].type_entretien,
+    //     status: req.body.candidature[0].status,
+    //     decision:req.body.candidature[0].decision
+    // }
 
     let newRecruteur = {
         prenom: req.body.prenom,
@@ -55,7 +55,7 @@ module.exports.recruteurAddOne = function (req, res) {
         candidature: []
     };
 
-    newRecruteur.candidature.push(candidature);
+   // newRecruteur.candidature.push(candidature);
     // const newEntreprise = {
     //     nom: req.body.entreprise.nom,
     //     adresse: req.body.entreprise.adresse,
