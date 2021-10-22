@@ -8,13 +8,16 @@ import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RecruteurService } from './service/recruteur.service';
 import { CandidatComponent } from './component/candidat/candidat.component';
+import { OffreEmploiComponent } from './component/offre-emploi/offre-emploi.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecruteurComponent,
     NavigationComponent,
-    CandidatComponent
+    CandidatComponent,
+    OffreEmploiComponent,
+    OffreEmploiComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -30,6 +33,10 @@ import { CandidatComponent } from './component/candidat/candidat.component';
         path: "candidat", component: CandidatComponent
       },
       {
+        path: "offre", component: OffreEmploiComponent
+      },
+      
+      {
         path:"nav", component:NavigationComponent
       }
     ])
@@ -39,3 +46,4 @@ import { CandidatComponent } from './component/candidat/candidat.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

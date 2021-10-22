@@ -12,8 +12,9 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li ngClass="isActiveTab(&#39;&#39;)" class="active"><a href="/">Home</a></li>
-        <li ngClass="isActiveTab(&#39;games&#39;)"><a href="/recruteur">Recruteurs</a></li>
-        <li ngClass="isActiveTab(&#39;games&#39;)"><a href="/candidat">Candidats</a></li>
+        <li ngClass="isActiveTab(&#39;offres&#39;)"><a href="/recruteur">Recruteurs</a></li>
+        <li ngClass="isActiveTab(&#39;offres&#39;)"><a href="/candidat">Candidats</a></li>
+        <li ngClass="isActiveTab(&#39;offres&#39;)"><a href="/offre">Offres</a></li>
         <li *ngIf="!isLoggedIn()"><a href="/register">Register</a></li>
         <li *ngIf="isLoggedIn()"><a href="/profile">Profile</a></li>
       </ul>
