@@ -9,6 +9,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RecruteurService } from './service/recruteur.service';
 import { CandidatComponent } from './component/candidat/candidat.component';
 import { OffreEmploiComponent } from './component/offre-emploi/offre-emploi.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { OffreEmploiComponent } from './component/offre-emploi/offre-emploi.comp
     OffreEmploiComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
+    BrowserModule, HttpClientModule, FormsModule,
     RouterModule.forRoot([
       {
         path: "", component:AppComponent
