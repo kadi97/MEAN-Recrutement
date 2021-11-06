@@ -33,6 +33,7 @@ module.exports.offre_emploiGetAll = function(req, res) {
 
 module.exports.offre_emploiAddOne = function (req, res) {
     console.log("Add one offre_emploi");
+    console.log(req.body);
     let date_publication = req.body.date_publication;
     let date_fin_publication = req.body.date_fin_publication;
     if (!date_publication){
@@ -41,17 +42,10 @@ module.exports.offre_emploiAddOne = function (req, res) {
     if (!date_fin_publication){
         date_fin_publication = Date.now();
     }
-    const candidat = {
-        
-        nom: req.body.candidat[0].nom,
-        prenom: req.body.candidat[0].prenom,
-        adresse: req.body.candidat[0].adresse,
-        telephone: req.body.candidat[0].telephone
-    }
 
     let newOffre_emploi = {
         intitule: req.body.intitule,
-        statut: req.body.statut,
+        statut: "INITIAL",
         description: req.body.description,
         date_publication: date_publication,
         date_fin_publication: date_fin_publication,
@@ -61,11 +55,6 @@ module.exports.offre_emploiAddOne = function (req, res) {
        type_contrat: {}
 
     };
-        
-    
-
-    newOffre_emploi.candidat.push(candidat);
-
     Offre_emploi.create(newOffre_emploi, function (err, offre_emploi) {
         const response = {
             status: successError,

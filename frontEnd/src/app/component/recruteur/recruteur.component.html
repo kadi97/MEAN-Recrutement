@@ -4,7 +4,7 @@
             <div class="card-header align-items-center px-3 px-md-5">
                 <h2>Liste des recruteurs</h2>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecruteurModal">Ajouter un recruteur</button>
+                <button *ngIf="isLoggedIn()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRecruteurModal">Ajouter un recruteur</button>
             </div>
 
             <div class="card-body px-3 px-md-5">

@@ -29,17 +29,17 @@ export class CandidatComponent implements OnInit {
     form?.click();
     //console.log(addForm.value);
     this.candidatService.addCandidat(addForm.value);
-    window.location.reload();
+    //window.location.reload();
   }
 
   public onUpdateCandidat(candidat: Candidat): void {
     this.candidatService.updateCandidat(candidat);
-    window.location.reload();
+    //window.location.reload();
   }
 
   public onDeleteCandidat(employeeId: string): void {
     this.candidatService.deleteCandidat(employeeId);
-    window.location.reload();
+    //window.location.reload();
   }
 
   public searchCandidats(key: string): void {

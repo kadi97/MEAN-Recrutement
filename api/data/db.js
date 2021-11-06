@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("./candidat-model");
+require("./user-model");
 require("./recruteur-model");
 require("./offre_emploi-model");
 require("./competence_candidat-model");

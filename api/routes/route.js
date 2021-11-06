@@ -1,5 +1,6 @@
 const express = require("express")
 
+const controllerUser = require("../controllers/user.controller");
 const controllerCandidat = require("../controllers/candidat.controller");
 const controllerRecruteur = require("../controllers/recruteur.controller");
 const controllerOffre_emploi = require("../controllers/offre_emploi.controller");
@@ -8,9 +9,26 @@ const controllerEntreprise = require("../controllers/entreprise.controller");
 const controllerType_contrat = require("../controllers/type_contrat.controller");
 
 const router = express.Router();
+router.route("/user")
+    .get(controllerUser.userGetAll)
+    .post(controllerUser.userAddOne)
+    ;
+router.route("/user/:username")
+    .get(controllerUser.foundByUsername);
+
+router.route("/user/:userId")
+    .get(controllerUser.usersGetOne)
+    .put(controllerUser.usersFullUpdate)
+    .patch(controllerUser.usersPartialUpdate)
+    .delete(controllerUser.usersDeleteOne)
+    ;
 router.route("/candidat")
     .get(controllerCandidat.candidatGetAll)
-    .post(controllerCandidat.candidatAddOne)
+    .post(controllerCandidat.candidatAddOne);
+
+router.route("/candidat/:username")
+    .get(controllerCandidat.foundByUsername);
+
 router.route("/candidat/:candidatId")
     .get(controllerCandidat.candidatsGetOne)
     .put(controllerCandidat.candidatsFullUpdate)
@@ -21,13 +39,15 @@ router.route("/candidat/:candidatId")
 router.route("/recruteur")
     .get(controllerRecruteur.recruteurGetAll)
     .post(controllerRecruteur.recruteurAddOne);
-    //lignes ajoutees
+
+router.route("/recruteur/:username")
+    .get(controllerRecruteur.foundByUsername);
+
 router.route("/recruteur/:recruteurId")
     .get(controllerRecruteur.recruteursGetOne)
     .put(controllerRecruteur.recruteursFullUpdate)
     .patch(controllerRecruteur.recruteursPartialUpdate)
     .delete(controllerRecruteur.recruteursDeleteOne)
-    //fin ligne ajoutee
     ;
 
 

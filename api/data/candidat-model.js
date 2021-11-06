@@ -18,7 +18,8 @@ const candidatSchema = new mongoose.Schema({
     },
     telephone: {
         type: String,
-        require: true
+        require: true,
+        unique:true
     },
     cv: String,
     email: String,

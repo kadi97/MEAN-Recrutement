@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule, HttpClientModule, FormsModule,
     RouterModule.forRoot([
       {
-        path: "", component:AppComponent
+        path: "", component:OffreEmploiComponent
       },
       {
         path: "recruteur", component: RecruteurComponent

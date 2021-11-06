@@ -1,13 +1,10 @@
-<p></p>
-<p> Bienvenue dans {{title}}</p>
-<!-- <> -->
-<div class="container">
+<div class="container" id="main-container">
     <div class="content contact-list">
         <div class="card card-default">
             <div class="card-header align-items-center px-3 px-md-5">
-                <h2>Liste des offres</h2>
+                <h2>Liste des offres d'emploi</h2>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-contact">Ajouter un offre</button>
+                <button *ngIf="isLoggedIn()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOfferModal">Ajouter un offre</button>
             </div>
 
             <div class="card-body px-3 px-md-5">
@@ -15,41 +12,137 @@
                     <div *ngFor="let offre of offresList" class="col-lg-6 col-xl-4 col-md-6 col-sm-12">
                         <div class="card card-default p-4">
                             <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-contact">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="mr-3 img-fluid rounded" alt="Avatar Image" />
+                                <img src="../../../assets/img/offer/img1.jpeg" class="mr-3 img-fluid rounded" alt="Avatar Image" />
                                 <div class="media-body">
                                     <h5 class="mt-0 mb-2 text-dark">{{offre.intitule}}</h5>
                                     <ul class="list-unstyled text-smoke text-smoke">
-                                        <li class="d-flex">
-                                            <i class="mdi mdi-map mr-1"></i>
-                                            <span>{{offre.statut}}</span>
-                                        </li>
-                                        <li class="d-flex">
+                                        <li class="d-flex"> Description: 
                                             <i class="mdi mdi-email mr-1"></i>
                                             <span>{{offre.description}}</span>
                                         </li>
-                                        <li class="d-flex">
+                                        <li class="d-flex"> Date de publication:
                                             <i class="mdi mdi-phone mr-1"></i>
-                                            <span>{{offre.date_publication}}</span>
+                                            <span>{{offre.date_publication | date}}</span>
                                         </li>
-                                        <li class="d-flex">
+                                        <li class="d-flex"> Date de fin:
                                             <i class="mdi mdi-phone mr-1"></i>
-                                            <span>{{offre.date_fin_publication}}</span>
+                                            <span>{{offre.date_fin_publication | date}}</span>
+                                        </li>
+                                        <li class="d-flex"> Statut:
+                                            <i class="mdi mdi-map mr-1"></i>
+                                            <span>{{offre.statut}}</span>
                                         </li>
                                     </ul>
                                 </div>
                             </a>
+                            <div class="card-body">
+                                <div class="float-right btn-group btn-group-sm">
+                                   <a *ngIf="isLoggedIn()" (click)="onOpenModal(offre, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                   <a *ngIf="isLoggedIn()" (click)="onOpenModal(offre, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                </div>
+                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Contact Modal -->
-        <div class="modal fade" id="modal-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Edit Modal -->
+        <div class="modal fade" id="updateOfferModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateOfferModalLabel">Edit candidat {{editOffer?.intitule}}</h5>
+                    <button type="button" class="Fermer" data-dismiss="modal" aria-label="Fermer">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                        <div class="form-group">
+                        <label for="name">Intitule</label>
+                        <input type="text" ngModel="{{editOffer?.intitule}}" name="intitule" class="form-control" id="intitule" aria-describedby="emailHelp" placeholder="Intitule">
+                        </div>
+                        <input type="hidden" ngModel="{{editOffer?._id}}" name="_id" class="form-control" id="_id" placeholder="ID">
+                        <div class="form-group">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="textArea" ngModel="{{editOffer?.description}}" name="description" class="form-control" id="description" placeholder="Description">
+                        </div>
+                        <label for="date_publication">Date de publication</label>
+                        <input type="date" ngModel="{{editOffer?.date_publication}}" name="date_publication" class="form-control" id="date_publication" placeholder="Date de publication">
+                        </div>
+                        <div class="form-group">
+                        <label for="telephone">Date de Fin</label> 
+                        <input type="date" ngModel="{{editOffer?.date_fin_publication}}" name="date_fin_publication" class="form-control" id="date_fin_publication" placeholder="Date de fin">
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse">Statut</label> 
+                            <input type="text" [disabled]="true" ngModel="{{editOffer?.statut}}" name="statut" class="form-control" id="statut" placeholder="Statut">
+                        </div>
+                        <!-- <div class="form-group">
+                        <label for="phone">Image URL</label>
+                        <input type="text" ngModel="{{editOffer?.email}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
+                        </div> -->
+                        <div class="modal-footer">
+                        <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                        <button  (click)="onUpdateOffer(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <!-- Add candidat Modal -->
+        <div class="modal fade" id="addOfferModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addOfferModalLabel">Edit candidat {{editOffer?.intitule}}</h5>
+                    <button type="button" class="Fermer" data-dismiss="modal" aria-label="Fermer">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form #addForm="ngForm" (ngSubmit)="onAddOffer(addForm)">
+                        <input type="hidden" ngModel name="_id" class="form-control" id="_id" placeholder="ID">
+                        <div class="form-group">
+                            <label for="intitule">Intitule</label>
+                            <input type="text" ngModel name="intitule" class="form-control" id="intitule" aria-describedby="emailHelp" placeholder="Intitule">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" ngModel name="description" class="form-control" id="description" placeholder="Description">
+                        </div>
+                        <label for="date_publication">Date de publication</label>
+                        <input type="date" ngModel name="date_publication" class="form-control" id="date_publication" placeholder="Date de publication">
+                        
+                        <div class="form-group">
+                        <label for="date_fin_publication">Date de fin</label> 
+                        <input type="date" ngModel name="date_fin_publication" class="form-control" id="date_fin_publication" placeholder="Date de Fin">
+                        </div>
+                        
+                        <!-- <div class="form-group">
+                        <label for="phone">Image URL</label>
+                        <input type="text" ngModel="{{editOffer?.email}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
+                        </div> -->
+                        <div class="modal-footer">
+                        <button type="button" id="add-offre-form" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                        <button  [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Offre Modal -->
+        <div class="modal fade" id="offre-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header justify-content-end border-bottom-0">
-                        <button type="button" class="btn-edit-icon" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-edit-icon" data-dismiss="modal" aria-label="Fermer">
                             <i class="mdi mdi-pencil"></i>
                         </button>
 
@@ -65,8 +158,8 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn-close-icon" data-dismiss="modal" aria-label="Close">
-                            <i class="mdi mdi-close"></i>
+                        <button type="button" class="btn-Fermer-icon" data-dismiss="modal" aria-label="Fermer">
+                            <i class="mdi mdi-Fermer"></i>
                         </button>
                     </div>
 
@@ -124,77 +217,113 @@
             </div>
         </div>
 
-        <!-- Add Contact Button  -->
-        <div class="modal fade" id="modal-add-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteOfferModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModelLabel">Delete Offer</h5>
+                    <button type="button" class="Fermer" data-dismiss="modal" aria-label="Fermer">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete offer {{deleteOffer?.intitule}}?</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button (click)="onDeleteOffer(deleteOffer._id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Offre Modal -->
+        <div class="modal fade" id="modal-candidat-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form>
-                        <div class="modal-header px-4">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Contact</h5>
+                    <div class="modal-header justify-content-end border-bottom-0">
+                        <button type="button" class="btn-edit-icon" data-dismiss="modal" aria-label="Fermer">
+                            <i class="mdi mdi-pencil"></i>
+                        </button>
+
+                        <div class="dropdown">
+                            <button class="btn-dots-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                            </div>
                         </div>
-                        <div class="modal-body px-4">
-                            <div class="form-group row mb-6">
-                                <label for="coverImage" class="col-sm-4 col-lg-2 col-form-label">User Image</label>
-                                <div class="col-sm-8 col-lg-10">
-                                    <div class="custom-file mb-1">
-                                        <input type="file" class="custom-file-input" id="coverImage" required="" />
-                                        <label class="custom-file-label" for="coverImage">Choose file...</label>
-                                        <div class="invalid-feedback">Example invalid custom file feedback</div>
+
+                        <button type="button" class="btn-Fermer-icon" data-dismiss="modal" aria-label="Fermer">
+                            <i class="mdi mdi-Fermer"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body pt-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-6">
+                                <div class="profile-content-left px-4">
+                                    <div class="card text-center px-0 border-0">
+                                        <div class="card-img mx-auto">
+                                            <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user image" />
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h4 class="py-2">Albrecht Straub</h4>
+                                            <p>Albrecht.straub@gmail.com</p>
+                                            <a class="btn btn-primary btn-pill btn-lg my-4" href="javascript:void(0)">Follow</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <div class="text-center pb-4">
+                                            <h6 class="pb-2">1503</h6>
+                                            <p>Friends</p>
+                                        </div>
+
+                                        <div class="text-center pb-4">
+                                            <h6 class="pb-2">2905</h6>
+                                            <p>Followers</p>
+                                        </div>
+
+                                        <div class="text-center pb-4">
+                                            <h6 class="pb-2">1200</h6>
+                                            <p>Following</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="firstName">First name</label>
-                                        <input type="text" class="form-control" id="firstName" value="Albrecht" />
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="lastName">Last name</label>
-                                        <input type="text" class="form-control" id="lastName" value="Straub" />
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group mb-4">
-                                        <label for="userName">User name</label>
-                                        <input type="text" class="form-control" id="userName" value="Doe" />
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group mb-4">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" value="albrecht.straub@gmail.com" />
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group mb-4">
-                                        <label for="Birthday">Birthday</label>
-                                        <input type="text" class="form-control" id="Birthday" value="01-10-1993" />
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="form-group mb-4">
-                                        <label for="event">Event</label>
-                                        <input type="text" class="form-control" id="event" value="Some value for event" />
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="contact-info px-4">
+                                    <h4 class="mb-1">Contact Details</h4>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Email address</p>
+                                    <p>Albrecht.straub@gmail.com</p>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Phone Number</p>
+                                    <p>+99 9539 2641 31</p>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Birthday</p>
+                                    <p>Nov 15, 1990</p>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Event</p>
+                                    <p>Lorem, ipsum dolor</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer px-4">
-                            <button type="button" class="btn btn-smoke btn-pill" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary btn-pill">Save Contact</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Notification for no offres -->
+        <div *ngIf="offresList?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Aucune Offre!</h4>
+                    <p>Aucune offre trouve.</p>
+            
+            </div>
+        </div>     
     </div>
 </div>

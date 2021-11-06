@@ -243,4 +243,29 @@ module.exports.candidatsDeleteOne = function (req, res) {
     });
 }
 
+module.exports.foundByUsername = function (req, res) {
+    const response = {
+        status: successError,
+        message: res
+    }
+    console.log("Json request received");
+
+    Candidat.find({"telephone": req.params.username}).exec(function (err, user) {
+        if (err) {
+            console.log("Found user error", err);
+            response.status = userError;
+            response.message = err;
+        }else if (user){
+            console.log("username trouve ", user);
+            response.status = successError;
+            response.message = user;
+        } else {
+            console.log("username non trouve!");
+            response.status = userError;
+            response.message = { "message": "username non trouvé!" };
+        } 
+        res.status(response.status).json(response.message);
+    });
+}
+
 

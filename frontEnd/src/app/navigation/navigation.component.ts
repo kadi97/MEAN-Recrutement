@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { NgForm } from '@angular/forms';
+import { User, UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,20 +10,33 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 })
 export class NavigationComponent implements OnInit {
 
-  login:boolean = false;
-  loggedUser="";
-  
+  loggedUser!: User;
   location: Location;
-  constructor(location: Location) { this.location = location; }
+  logStatus = true;
+  constructor(location: Location, private userService:UserService) { this.location = location; }
 
   ngOnInit(): void {
   }
   public isLoggedIn(){
-    return false;
+    return this.logStatus;
+  }
+
+  public login(user: NgForm){
+    this.userService.getUser(user.value)
+      .then(response => {
+        this.loggedUser = response[0];
+        if (this.loggedUser.password === user.value.password){
+          console.log(this.loggedUser.username);
+          this.logStatus = true;
+        } else {
+          console.log("error: ", this.loggedUser.username);
+        }
+      }).catch(err => console.log(err)
+      );
   }
 
   public logout(){
-    return false;
+    this.logStatus = false;
   }
 
   public isActive(url:string):string{

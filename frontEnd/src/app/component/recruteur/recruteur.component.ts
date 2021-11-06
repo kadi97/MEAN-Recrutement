@@ -29,17 +29,17 @@ export class RecruteurComponent implements OnInit {
     form?.click();
     //console.log(addForm.value);
     this.recruteurService.addRecruteur(addForm.value);
-    window.location.reload();
+    // window.location.reload();
   }
 
   public onUpdateRecruteur(Recruteur: Recruteur): void {
     this.recruteurService.updateRecruteur(Recruteur);
-    window.location.reload();
+    // window.location.reload();
   }
 
   public onDeleteRecruteur(employeeId: string): void {
     this.recruteurService.deleteRecruteur(employeeId);
-    window.location.reload();
+    // window.location.reload();
   }
 
   public searchRecruteurs(key: string): void {
@@ -82,6 +82,10 @@ export class RecruteurComponent implements OnInit {
     }
     container?.appendChild(button);
     button.click();
+  }
+
+  public isLoggedIn(){
+    return false;
   }
 }
 
