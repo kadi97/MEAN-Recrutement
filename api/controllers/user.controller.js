@@ -47,22 +47,25 @@ module.exports.userAddOne = function (req, res) {
             response.status = serverError;
             response.message = err;
         }  else if (user) {
+            if (user.username){
                 console.log("Username deja existant", user);
                 response.status = userError;
                 response.message = "Ce username exist deja, veuillez en choisir un autre!";
-        } else {
-            User.create(newUser, function (err, user) {  
-                if (err) {
-                    console.log("Error while creation", err);
-                    response.status = userError;
-                    response.message = err;
-                } else {
-                    console.log("Success create User", user);
-                    response.status = successError;
-                    response.message = user;
-                }
-            });
-        }
+            } else {
+                User.create(newUser, function (err, user) {  
+                    if (err) {
+                        console.log("Error while creation", err);
+                        response.status = userError;
+                        response.message = err;
+                    } else {
+                        console.log("Success create User", user);
+                        response.status = successError;
+                        response.message = user;
+                    }
+                });
+            }
+        
+         } 
         res.status(response.status).json(response.message);
     });
     
