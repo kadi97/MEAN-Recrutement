@@ -92,7 +92,7 @@ export class OffreEmploiComponent implements OnInit {
     button.click();
   }
   public isLoggedIn(){
-    return false;
+    return true;
   }
 
 }

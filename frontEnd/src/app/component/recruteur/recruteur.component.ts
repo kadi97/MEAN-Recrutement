@@ -85,7 +85,7 @@ export class RecruteurComponent implements OnInit {
   }
 
   public isLoggedIn(){
-    return false;
+    return true;
   }
 }
 
