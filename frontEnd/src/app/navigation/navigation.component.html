@@ -29,7 +29,7 @@
           <button type="submit" class="btn btn-sm btn-success">Login</button>
         </form>
       </div>
-      <ul *ngIf="isLoggedIn()" color= "#8a909d" class="new navbar-nav navbar-right">
+      <ul *ngIf="isLoggedIn()" color= "#008000" class="new navbar-nav navbar-right">
         <li><p class="navbar-text">Welcome {{loggedUser.username}}</p></li>
         <li><button class="navbar-btn btn-sm btn-info" (click)="logout()">Logout</button></li>
       </ul>
