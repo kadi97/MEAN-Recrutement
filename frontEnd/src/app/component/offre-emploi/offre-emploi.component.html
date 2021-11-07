@@ -11,7 +11,7 @@
                 <div class="row">
                     <div *ngFor="let offre of offresList" class="col-lg-6 col-xl-4 col-md-6 col-sm-12">
                         <div class="card card-default p-4">
-                            <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-contact">
+                            <a href="javascript:0" class="media text-secondary" (click)="onOpenModal(offre, 'read')">
                                 <img src="../../../assets/img/offer/img1.jpeg" class="mr-3 img-fluid rounded" alt="Avatar Image" />
                                 <div class="media-body">
                                     <h5 class="mt-0 mb-2 text-dark">{{offre.intitule}}</h5>
@@ -37,8 +37,8 @@
                             </a>
                             <div class="card-body">
                                 <div class="float-right btn-group btn-group-sm">
-                                   <a *ngIf="isLoggedIn()" (click)="onOpenModal(offre, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                                   <a *ngIf="isLoggedIn()" (click)="onOpenModal(offre, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                   <a *ngIf="!isLoggedIn()" (click)="onOpenModal(offre, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                   <a *ngIf="!isLoggedIn()" (click)="onOpenModal(offre, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
                                 </div>
                              </div>
                         </div>
@@ -138,7 +138,7 @@
         </div>
 
         <!-- Offre Modal -->
-        <div class="modal fade" id="offre-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="readOfferModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header justify-content-end border-bottom-0">
@@ -169,30 +169,13 @@
                                 <div class="profile-content-left px-4">
                                     <div class="card text-center px-0 border-0">
                                         <div class="card-img mx-auto">
-                                            <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user image" />
+                                            <img class="rounded-circle" src="../../../assets/img/offer/img1.jpeg" alt="user image" />
                                         </div>
 
                                         <div class="card-body">
-                                            <h4 class="py-2">Albrecht Straub</h4>
-                                            <p>Albrecht.straub@gmail.com</p>
-                                            <a class="btn btn-primary btn-pill btn-lg my-4" href="javascript:void(0)">Follow</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between">
-                                        <div class="text-center pb-4">
-                                            <h6 class="pb-2">1503</h6>
-                                            <p>Friends</p>
-                                        </div>
-
-                                        <div class="text-center pb-4">
-                                            <h6 class="pb-2">2905</h6>
-                                            <p>Followers</p>
-                                        </div>
-
-                                        <div class="text-center pb-4">
-                                            <h6 class="pb-2">1200</h6>
-                                            <p>Following</p>
+                                            <h4 class="py-2">{{readOffer.intitule}}</h4>
+                                            <p>Statut: {{readOffer.statut}}</p>
+                                            <a class="btn btn-primary btn-pill btn-lg my-4" href="javascript:void(0)">Postuler</a>
                                         </div>
                                     </div>
                                 </div>
@@ -200,15 +183,15 @@
 
                             <div class="col-md-6">
                                 <div class="contact-info px-4">
-                                    <h4 class="mb-1">Contact Details</h4>
-                                    <p class="text-dark font-weight-medium pt-4 mb-2">Email address</p>
-                                    <p>Albrecht.straub@gmail.com</p>
-                                    <p class="text-dark font-weight-medium pt-4 mb-2">Phone Number</p>
-                                    <p>+99 9539 2641 31</p>
-                                    <p class="text-dark font-weight-medium pt-4 mb-2">Birthday</p>
-                                    <p>Nov 15, 1990</p>
-                                    <p class="text-dark font-weight-medium pt-4 mb-2">Event</p>
-                                    <p>Lorem, ipsum dolor</p>
+                                    <h4 class="mb-1">Details de l'offre</h4>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Intitule:</p>
+                                    <p>{{readOffer.intitule}}</p>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Description:</p>
+                                    <p>{{readOffer.description}}</p>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Date de publication:</p>
+                                    <p>{{readOffer.date_publication | date}}</p>
+                                    <p class="text-dark font-weight-medium pt-4 mb-2">Date fin publication:</p>
+                                    <p>{{readOffer.date_fin_publication}}</p>
                                 </div>
                             </div>
                         </div>

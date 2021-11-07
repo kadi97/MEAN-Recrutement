@@ -13,6 +13,7 @@ export class OffreEmploiComponent implements OnInit {
   offresList!: OffreEmploi[];
   editOffer!: OffreEmploi;
   deleteOffer!: OffreEmploi;
+  readOffer!: OffreEmploi;
   constructor(private offreService:OffreEmploiService){}
   
   ngOnInit(): void{
@@ -82,6 +83,10 @@ export class OffreEmploiComponent implements OnInit {
     if (mode === 'delete') {
       this.deleteOffer = OffreEmploi;
       button.setAttribute('data-target', '#deleteOfferModal');
+    }
+    if (mode === 'read') {
+      this.readOffer = OffreEmploi;
+      button.setAttribute('data-target', '#readOfferModal');
     }
     container?.appendChild(button);
     button.click();
