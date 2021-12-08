@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const type_contratSchema = require("./type_contrat-model");
 const candidatSchema = require("./candidat-model");
 const entrepriseSchema = require("./entreprise-model");
+const recruteurSchema = require("./recruteur-model");
 
 const offre_emploiSchema = new mongoose.Schema({
     intitule: {
@@ -23,6 +24,7 @@ const offre_emploiSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    publier_par: recruteurSchema,
     candidat: [candidatSchema],
     type_contrat: {type_contratSchema},
     entreprise: {entrepriseSchema}

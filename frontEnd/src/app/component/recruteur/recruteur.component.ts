@@ -12,6 +12,8 @@ export class RecruteurComponent implements OnInit {
   recruteursList!: Recruteur[];
   editRecruteur!: Recruteur;
   deleteRecruteur!: Recruteur;
+  readRecruteur!: Recruteur;
+
   constructor(private recruteurService:RecruteurService){}
 
   ngOnInit(): void{
@@ -80,6 +82,13 @@ export class RecruteurComponent implements OnInit {
       this.deleteRecruteur = Recruteur;
       button.setAttribute('data-target', '#deleteRecruteurModal');
     }
+    if (mode === 'read') {
+      this.readRecruteur = Recruteur;
+      console.log(this.readRecruteur);
+      
+      button.setAttribute('data-target', '#readRecruteurModal');
+    }
+
     container?.appendChild(button);
     button.click();
   }

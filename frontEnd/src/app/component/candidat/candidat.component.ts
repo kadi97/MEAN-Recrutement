@@ -8,9 +8,13 @@ import { CandidatService } from 'src/app/service/candidat.service';
   styleUrls: ['./candidat.component.css']
 })
 export class CandidatComponent implements OnInit {
+  title = 'candidat ';
   candidatsList!: Candidat[];
   editCandidat!: Candidat;
   deleteCandidat!: Candidat;
+  readCandidat!: Candidat;
+  logedUser = "no user";
+
   constructor(private candidatService:CandidatService){}
 
   ngOnInit(): void{
@@ -79,6 +83,12 @@ export class CandidatComponent implements OnInit {
     if (mode === 'delete') {
       this.deleteCandidat = candidat;
       button.setAttribute('data-target', '#deleteCandidatModal');
+    }
+    if (mode === 'read') {
+      this.readCandidat = candidat;
+      console.log(this.readCandidat);
+      
+      button.setAttribute('data-target', '#readCandidatModal');
     }
     container?.appendChild(button);
     button.click();

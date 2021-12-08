@@ -10,6 +10,7 @@ import { RecruteurService } from './service/recruteur.service';
 import { CandidatComponent } from './component/candidat/candidat.component';
 import { OffreEmploiComponent } from './component/offre-emploi/offre-emploi.component';
 import { FormsModule } from '@angular/forms';
+//import { RegisterComponent } from './component/register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,6 @@ import { FormsModule } from '@angular/forms';
     RecruteurComponent,
     NavigationComponent,
     CandidatComponent,
-    OffreEmploiComponent,
     OffreEmploiComponent
   ],
   imports: [
@@ -40,6 +40,9 @@ import { FormsModule } from '@angular/forms';
       {
         path:"nav", component:NavigationComponent
       }
+      // {
+      //   path:"login", component:RegisterComponent
+      // }
     ])
   ],
   //exports: [RouterModule],

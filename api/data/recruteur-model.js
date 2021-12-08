@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const entrepriseSchema = require("./entreprise-model");
 const candidatureSchema = require("./candidature-model");
+const offreSchema = require("./offre_emploi-model");
 
 const recuteurSchema = new mongoose.Schema({
     nom: {
@@ -26,7 +27,8 @@ const recuteurSchema = new mongoose.Schema({
     },
     //L'entreprise du recruter sous un objet
     entreprise: {entrepriseSchema},
-    candidature:[candidatureSchema]
+    candidature:[candidatureSchema],
+    offrePublier:[offreSchema]
 
 
 });
