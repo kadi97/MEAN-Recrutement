@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CandidatService } from 'src/app/service/candidat.service';
 import { OffreEmploiService } from '../../service/offre-emploi.service';
+import { Candidat } from '../candidat/candidat.component';
 
 @Component({
   selector: 'app-offre-emploi',
@@ -11,13 +13,15 @@ export class OffreEmploiComponent implements OnInit {
 
   title = 'OffreEmploi ';
   offresList!: OffreEmploi[];
+  candidatList!: Candidat[];
   editOffer!: OffreEmploi;
   deleteOffer!: OffreEmploi;
   readOffer!: OffreEmploi;
-  constructor(private offreService:OffreEmploiService){}
+  constructor(private offreService:OffreEmploiService, private candidatService:CandidatService){}
   
   ngOnInit(): void{
     this.getOffers();
+    this.getCandidats();
     console.log(this.offresList);
     
   }
@@ -25,6 +29,11 @@ export class OffreEmploiComponent implements OnInit {
   public getOffers(): void {
     this.offreService.getOffreEmplois()
       .then(offres => this.offresList = offres);
+  }
+
+  public getCandidats(): void {
+    this.candidatService.getCandidats()
+      .then(result => this.candidatList = result);
   }
 
   public onAddOffer(addForm: NgForm): void {
@@ -95,6 +104,28 @@ export class OffreEmploiComponent implements OnInit {
     return true;
   }
 
+  public postuler(offre: OffreEmploi){
+    //ajout de l'offe dans la liste des offres du candidat
+    let candidat = this.getCandidatByEmail("sdiallo@miu.edu");
+    candidat.offre_emploi.push(offre);
+    console.log("candidat avant update: ", candidat);
+    
+    this.candidatService.updateCandidat(candidat);
+
+
+    //ajout du candidat dans la liste des candidats pour cette offre
+    // offre.candidat.push(candidat);
+    // this.offreService.updateOffreEmploi(offre);
+    console.log("updated offer: ", offre);
+    
+  }
+
+  public getCandidatByEmail(email:string): Candidat
+  {
+    let candidatTrouve = this.candidatList.filter(candidat => candidat.email === email);
+    return candidatTrouve[0];
+  }
+
 }
 
 
@@ -105,4 +136,5 @@ export class OffreEmploi{
   description!:string;
   date_fin_publication!:Date;
   date_publication!:Date;
+  candidat!:Candidat[]
 }

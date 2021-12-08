@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CandidatService } from 'src/app/service/candidat.service';
+import { OffreEmploi } from '../offre-emploi/offre-emploi.component';
 
 @Component({
   selector: 'app-candidat',
@@ -104,4 +105,5 @@ export class Candidat{
   cv!:string;
   dob!:Date;
   email!:string;
+  offre_emploi!:OffreEmploi[]
 }
