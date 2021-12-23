@@ -135,7 +135,9 @@ module.exports.candidatsFullUpdate = function (req, res) {
             candidat.email = req.body.email;
             candidat.dob = req.body.dob;
             candidat.adresse = req.body.adresse;
-
+            if (req.body.offre_emploi){
+                candidat.offre_emploi = req.body.offre_emploi;
+            }
             candidat.save(function (err, updatedcandidat) {
                 if (err) {
                     console.log("candidat not updated");

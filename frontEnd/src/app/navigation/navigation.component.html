@@ -14,7 +14,7 @@
         <li ngClass="isActiveTab(&#39;&#39;)" class="active"><a href="/">Accueil</a></li>
         <li *ngIf="isLoggedIn()" ngClass="isActiveTab(&#39;recruteur&#39;)"><a href="/recruteur">Recruteur</a></li>
         <li *ngIf="isLoggedIn()" ngClass="isActiveTab(&#39;candidat&#39;)"><a href="/candidat">Candidat</a></li>
-        <li *ngIf="isLoggedIn()" ngClass="isActiveTab(&#39;offre&#39;)"><a href="/offre">Offre</a></li>
+        <li *ngIf="isLoggedIn()" ngClass="isActiveTab(&#39;offre&#39;)"><a href="/candidat-offres">Mes offres</a></li>
         <li *ngIf="!isLoggedIn()"><a href="/register">Register</a></li>
         <li *ngIf="isLoggedIn()"><a href="/profile">Profile</a></li>
       </ul>

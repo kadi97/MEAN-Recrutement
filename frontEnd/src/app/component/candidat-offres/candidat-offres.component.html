@@ -2,35 +2,35 @@
     <div class="content contact-list">
         <div class="card card-default">
             <div class="card-header align-items-center px-3 px-md-5">
-                <h2>Liste des offres d'emploi</h2>
+                <h2>Ma liste de candidature</h2>
 
-                <button *ngIf="isLoggedIn()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOfferModal">Ajouter un offre</button>
+                <!-- <button *ngIf="isLoggedIn()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOfferModal">Ajouter un offre</button> -->
             </div>
 
             <div class="card-body px-3 px-md-5">
                 <div class="row">
-                    <div *ngFor="let offre of offresList" class="col-lg-6 col-xl-4 col-md-6 col-sm-12">
+                    <div *ngFor="let offre of offresCandidat" class="col-lg-6 col-xl-4 col-md-6 col-sm-12">
                         <div class="card card-default p-4">
                             <a href="javascript:0" class="media text-secondary" (click)="onOpenModal(offre, 'read')">
                                 <img src="../../../assets/img/offer/img1.jpeg" class="mr-3 img-fluid rounded" alt="Avatar Image" />
                                 <div class="media-body">
-                                    <h5 class="mt-0 mb-2 text-dark">{{offre.intitule}}</h5>
+                                    <h5 class="mt-0 mb-2 text-dark">{{offre!.intitule}}</h5>
                                     <ul class="list-unstyled text-smoke text-smoke">
                                         <li class="d-flex"> Description: 
                                             <i class="mdi mdi-email mr-1"></i>
-                                            <span>{{offre.description}}</span>
+                                            <span>{{offre!.description}}</span>
                                         </li>
                                         <li class="d-flex"> Date de publication:
                                             <i class="mdi mdi-phone mr-1"></i>
-                                            <span>{{offre.date_publication | date}}</span>
+                                            <span>{{offre!.date_publication | date}}</span>
                                         </li>
                                         <li class="d-flex"> Date de fin:
                                             <i class="mdi mdi-phone mr-1"></i>
-                                            <span>{{offre.date_fin_publication | date}}</span>
+                                            <span>{{offre!.date_fin_publication | date}}</span>
                                         </li>
                                         <li class="d-flex"> Statut:
                                             <i class="mdi mdi-map mr-1"></i>
-                                            <span>{{offre.statut}}</span>
+                                            <span>{{offre!.statut}}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -175,8 +175,8 @@
                                         <div class="card-body">
                                             <h4 class="py-2">{{readOffer?.intitule}}</h4>
                                             <p>Statut: {{readOffer?.statut}}</p>
-                                            <a class="btn btn-primary btn-pill btn-lg my-4" (click)="postuler(readOffer)">Postuler</a>
-                                            <!-- <a class="btn btn-warning btn-pill btn-lg my-4" (click)="annulerCandidature(readOffer)">Annuler</a> -->
+                                            <!-- <a class="btn btn-primary btn-pill btn-lg my-4" (click)="postuler(readOffer)">Postuler</a> -->
+                                            <a class="btn btn-warning btn-pill btn-lg my-4" (click)="annulerCandidature(readOffer)">Annuler</a>
                                         </div>
                                     </div>
                                 </div>
@@ -302,10 +302,10 @@
         </div>
         
         <!-- Notification for no offres -->
-        <div *ngIf="offresList?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+        <div *ngIf="offresCandidat?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
             <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">Aucune Offre!</h4>
-                    <p>Aucune offre trouve.</p>
+                <h4 class="alert-heading">Aucune candidature trouvee!</h4>
+                    <p>Aucune candidature trouvee.</p>
             
             </div>
         </div>     

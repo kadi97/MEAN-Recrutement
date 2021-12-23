@@ -1,43 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CandidatService } from 'src/app/service/candidat.service';
-import { OffreEmploiService } from '../../service/offre-emploi.service';
+import { OffreEmploiService } from 'src/app/service/offre-emploi.service';
 import { Candidat } from '../candidat/candidat.component';
 
 @Component({
-  selector: 'app-offre-emploi',
-  templateUrl: './offre-emploi.component.html',
-  styleUrls: ['./offre-emploi.component.css']
+  selector: 'app-candidat-offres',
+  templateUrl: './candidat-offres.component.html',
+  styleUrls: ['./candidat-offres.component.css']
 })
-export class OffreEmploiComponent implements OnInit {
+export class CandidatOffresComponent implements OnInit {
 
   title = 'OffreEmploi ';
   offresList!: OffreEmploi[];
+  offresCandidat!: OffreEmploi[];
   candidatList!: Candidat[];
   editOffer!: OffreEmploi;
   deleteOffer!: OffreEmploi;
   readOffer!: OffreEmploi;
   constructor(private offreService:OffreEmploiService, private candidatService:CandidatService){}
   
+  
   ngOnInit(): void{
-    this.getOffers();
-    this.getCandidats();
-    console.log(this.offresList);
-    
+    // this.getCandidats();
+    this.candidatOffres();
   }
-
-  public getOffers(): void {
-    this.offreService.getOffreEmplois()
-      .then(offres => this.offresList = offres);
-  }
-
   public getCandidats(): void {
     this.candidatService.getCandidats()
-      .then(result => this.candidatList = result);
+      .then(result => {
+        this.candidatList = result;
+      });
   }
 
-  public getCandidatOffers(candidat: Candidat){
+  public getCandidatByEmail(email:string): Candidat
+  {
+    console.log("list des candidats: ", this.candidatList);
+    let candidatTrouve = this.candidatList!.filter(candidat => candidat.email === email);
+    return candidatTrouve?candidatTrouve[0]:new Candidat;
+  }
 
+  public candidatOffres(): void {
+    this.candidatService.getCandidats()
+      .then(result => {
+        this.candidatList = result;
+        let candidat = result!.filter(candidat => candidat.email === "sdiallo@miu.edu");
+        this.offresCandidat = candidat[0]!.offre_emploi;
+        console.log(this.offresCandidat);
+      });
   }
 
   public onAddOffer(addForm: NgForm): void {
@@ -58,22 +67,6 @@ export class OffreEmploiComponent implements OnInit {
   public onDeleteOffer(employeeId: string): void {
     this.offreService.deleteOffreEmploi(employeeId);
     window.location.reload();
-  }
-
-  public searchOffreEmplois(key: string): void {
-    console.log(key);
-    const results: OffreEmploi[] = [];
-    for (const offre of this.offresList) {
-      if (offre.intitule.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || offre.description.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || offre.statut.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(offre);
-      }
-    }
-    this.offresList = results;
-    if (results.length === 0 || !key) {
-      this.getOffers();
-    }
   }
 
   public onOpenModal(OffreEmploi: OffreEmploi, mode: string): void {
@@ -111,12 +104,11 @@ export class OffreEmploiComponent implements OnInit {
   public postuler(offre: OffreEmploi){
     //ajout de l'offe dans la liste des offres du candidat
     let candidat = this.getCandidatByEmail("sdiallo@miu.edu");
-    let dejaPostuler = false;
     let offreExistante = candidat.offre_emploi.find(offer => offer._id === offre._id);
     if (!offreExistante){
       candidat.offre_emploi.push(offre);
       alert("Candidature prise en compte");
-      window.location.href = "candidat-offres";
+      window.location.reload();
     } else
       alert("Vous avez deja postulé a cette offre!");
 
@@ -131,21 +123,18 @@ export class OffreEmploiComponent implements OnInit {
   public annulerCandidature(offre: OffreEmploi){
     let candidat = this.getCandidatByEmail("sdiallo@miu.edu");
     candidat.offre_emploi.forEach(offer => {
-      if (offer._id === offre._id) candidat.offre_emploi.pop();
+
+      if (offer._id === offre._id) {
+        candidat.offre_emploi.pop();
+        alert("candidature retiree!");
+      }
     });
     this.candidatService.updateCandidat(candidat);
+    console.log("updated candidat: ", candidat);
+    
     window.location.href = "candidat-offres";
   }
-
-  public getCandidatByEmail(email:string): Candidat
-  {
-    let candidatTrouve = this.candidatList.filter(candidat => candidat.email === email);
-    return candidatTrouve[0];
-  }
-
 }
-
-
 export class OffreEmploi{
   _id!:string;
   intitule!:string;

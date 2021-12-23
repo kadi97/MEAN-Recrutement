@@ -10,6 +10,9 @@ import { RecruteurService } from './service/recruteur.service';
 import { CandidatComponent } from './component/candidat/candidat.component';
 import { OffreEmploiComponent } from './component/offre-emploi/offre-emploi.component';
 import { FormsModule } from '@angular/forms';
+import { CandidatOffresComponent } from './component/candidat-offres/candidat-offres.component';
+import { CandidatService } from './service/candidat.service';
+import { OffreEmploiService } from './service/offre-emploi.service';
 //import { RegisterComponent } from './component/register/register.component';
 
 @NgModule({
@@ -18,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     RecruteurComponent,
     NavigationComponent,
     CandidatComponent,
-    OffreEmploiComponent
+    OffreEmploiComponent,
+    CandidatOffresComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
@@ -36,7 +40,9 @@ import { FormsModule } from '@angular/forms';
       {
         path: "offre", component: OffreEmploiComponent
       },
-      
+      {
+        path: "candidat-offres", component: CandidatOffresComponent
+      },
       {
         path:"nav", component:NavigationComponent
       }
@@ -46,7 +52,7 @@ import { FormsModule } from '@angular/forms';
     ])
   ],
   //exports: [RouterModule],
-  providers: [RecruteurService],
+  providers: [RecruteurService, CandidatService, OffreEmploiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

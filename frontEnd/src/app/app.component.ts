@@ -14,12 +14,12 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void{
     this.getRecruteurs();
-    console.log(this.recruteursList);
-    
   }
 
   public getRecruteurs(): void {
     this.recruteurService.getRecruteurs()
-      .then(foundRecruteurs => this.recruteursList = foundRecruteurs);
+      .then(foundRecruteurs => {
+        this.recruteursList = foundRecruteurs
+      });
   }
 }
